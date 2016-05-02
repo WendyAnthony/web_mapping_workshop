@@ -78,7 +78,13 @@ var clickHandler = function(e){
     $('#info').append(info)
   })
   
-}
+  // Access current location
+  var = myGeoJSON = myLocation.getGeoJSON();
+  
+  // Call function that is actually written below.
+  getDirections(myGeoJSON.geometry.coordinates, feature.geomtery.coordinates);
+  
+} // end click handler
 
 featureLayer.on('ready', function() {
 	this.eachLayer(function(layer) {
@@ -117,3 +123,47 @@ map.on('locationfound', function(e) {
 
 // Now get our location
 map.locate({setView: true})
+
+// Directions! Integrate w/ 3rd party turn-by-turn directions group. Using mapzen - which uses OSM. Check out their docs (in exercise 9).
+// Start w/ blank feature layer again.
+var routeLine = L.mapbox.featureLayer().addTo(map);
+
+// Need function to take from point and to point and call their service
+function getDirections(frm,to) {
+  	var jsonPayload = JSON.stringify({
+    	locations: [
+          {lat: frm[1], lon: frm[0]},
+          {lat: to[1], lon: to[0]}
+        ],
+      	// tell it how to prioritize routes
+      	costing: 'pedestrian',
+      	units: 'miles'
+    })
+    
+    // now need a way to call the service. Since we are using jquery (access it using $).
+    $.ajax({
+    	url: 'http://valhalla.mapzen.com/route',
+      	data: {
+          	json: jsonPayLoad,
+          	// Need to get your own key after this workshop. Go to the website and authenticate w/ github.
+          	api_key: 'valhalla-gwtf3x2'
+        }
+    }).done(function(data){
+    	var routeShape = polyline.decode(data.trip.legs[0].shape):
+        routeLine.setGeoJSON({
+          	type: 'Feature',
+          	geometry: {
+            	type: 'LineString',
+              	coordinates: routeShape
+            },
+          	properties: {
+              	// Mapbox simple style spec.
+            	"stroke": "#ed23f1",
+              	"stroke-opacity": 0.8,
+             	"stroke-width": 8
+            }
+        
+        })
+    })
+  
+}
