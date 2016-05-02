@@ -82,7 +82,7 @@ var clickHandler = function(e){
   var myGeoJSON = myLocation.getGeoJSON();
   
   // Call function that is actually written below.
-  getDirections(myGeoJSON.geometry.coordinates, feature.geomtery.coordinates);
+  getDirections(myGeoJSON.geometry.coordinates, feature.geometry.coordinates);
   
 } // end click handler
 
