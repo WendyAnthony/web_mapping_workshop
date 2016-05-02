@@ -16,3 +16,25 @@ var map = L.mapbox.map('map', mapId);
 map.setView([39, -96], 4);
 
 // Great, now we have a basic web map!
+
+// Set ref to data we want to use (single quotes for strings to you can use double quotes inside them later).
+var dataFileToAdd = 'data/restaurants.geojson';
+
+// Create a feature layer using constructor function that is empty for now - like a shapefile on desktop gis
+var featureLayer = L.mapbox.featureLayer()
+	// Load data
+	featureLayer.loadURL(dataFileToAdd);
+	// Add it to the  map
+	featureLayer.addTo(map);
+	// Stying - using ".on" is a listener called "ready" that is set once above stuff is loaded - 
+	featureLayer.on('ready', function(){
+    		this.eachLayer(function(layer){
+              	// Mapbox/leaflet constructs
+            	layer.setIcon(L.mapbox.marker.icon({
+                	"marker-color": "#8834bb",
+                	"marker-size": "large",
+                  	"marker-symbol": "restaurant"
+                }))
+    })
+    map.fitBounds(featureLayer.getBounds()):
+
