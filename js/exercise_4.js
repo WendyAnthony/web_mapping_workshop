@@ -171,6 +171,7 @@ function getDirections(frm,to) {
       		$('#summary').empty();
       		$('#distance').text((Math.round(data.trip.summary.length * 100) / 100) + data.trip.units);
       		$('#time').text((Math.round(data.trip.summary.time / 60 * 100) / 100) + ' min');
+        })
 
       	data.trip.legs[0].maneuvers.forEach(function(item){
        		var direction = '';
@@ -180,4 +181,4 @@ function getDirections(frm,to) {
         	direction += '</li>';
         	$('#summary').append(direction);
       })
-    })  
+   
