@@ -137,7 +137,9 @@ function getDirections(frm,to) {
         ],
       	// tell it how to prioritize routes
       	costing: 'pedestrian',
-      	units: 'miles'
+      	directions_options: {
+      		units: 'miles'
+        }
     })
     
     // now need a way to call the service. Since we are using jquery (access it using $).
