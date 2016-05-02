@@ -175,8 +175,7 @@ function getDirections(frm,to) {
           data.trip.legs[0].maneuvers.forEach(function(items){
             var direction = '';
             // li is a list 
-            direction += '<li class="instruction" data-begin=' + item.begin_shape_index + ' data-end=' + item.end_shape_index + '>';
-            
+direction += '<li class="instruction" data-begin=' + item.begin_shape_index + ' data-end=' + item.end_shape_index + '>';            
             if(item.verbal_post_transition_instruction){
             	direction += '<p class="post-transition">' +
                   item.verbal_post_transition_instruction + '</p>'          	
