@@ -74,7 +74,7 @@ var clickHandler = function(e){
     }
     info += '</div>';
     // now append info
-    $('#info').append(info)'
+    $('#info').append(info)
   })
   
 }
