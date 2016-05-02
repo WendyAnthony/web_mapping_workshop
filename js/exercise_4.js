@@ -79,7 +79,7 @@ var clickHandler = function(e){
   })
   
   // Access current location
-  var = myGeoJSON = myLocation.getGeoJSON();
+  var myGeoJSON = myLocation.getGeoJSON();
   
   // Call function that is actually written below.
   getDirections(myGeoJSON.geometry.coordinates, feature.geomtery.coordinates);
@@ -142,7 +142,7 @@ function getDirections(frm,to) {
     
     // now need a way to call the service. Since we are using jquery (access it using $).
     $.ajax({
-    	url: 'http://valhalla.mapzen.com/route',
+    	url: 'https://valhalla.mapzen.com/route',
       	data: {
           	json: jsonPayLoad,
           	// Need to get your own key after this workshop. Go to the website and authenticate w/ github.
