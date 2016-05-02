@@ -40,9 +40,47 @@ featureLayer.on('ready', function(){
  })
     map.fitBounds(featureLayer.getBounds());
 })
+// Add pop ups
+// featureLayer.on('ready', function(){
+//	this.eachLayer(function(layer){
+//    	layer.bindPopup('Welcome to ' + layer.feature.properties.name);
+//    })                
+// })
 
-featureLayer.on('ready', function(){
-	this.eachLayer(function(layer){
-    	layer.bindPopup('Welcome to ' + layer.feature.properties.name);
-    })                
- })
+// Nah, how about a sidebar instead!
+// Write a function called a click handler - gets called when you click on a point.
+// 'e' in the fucntion consumes "event" of clicking. It will have our target element and geoJSON features
+var clickHandler = function(e){ 
+  // empty the div we are going to play with (in case we have clicked it before - need to empty what's there).
+  // So we need to empty the 'info' dive within sidebar (see index.html)
+  // using jquery (i.e. the .empty) - can ref query by passing in a selector (look up #'s .'s etc.).
+  $('#info').empty();
+  
+  // get the info from the point you click on.
+  var feature = e.target.feature;
+  
+  // fade in is in milliseconds
+  $('#sidebar').fadeIn(400, function(){
+  	var info = '';
+    
+    // take variable and apped something into it is the +=
+    info += '<div>';
+    info += '<h2>' + feature.properties.name + '</h2>';
+    // If these properties exist, add them.
+    if(feature.properties.cuisine) info += '<p>' + feature.properties.cuisine + '</p>';
+    if(feature.properties.phone) info += '<p>' + feature.properties.phone + '</p>';
+    if(feature.properties.website) {
+    	info += '<p><a href="' + feature.properties.website + '">' + feature.properties.website + '</a></p>';
+    }
+    info += '</div>';
+    // now append info
+    $('#info').append(info)'
+  })
+  
+}
+
+featureLayer.on('ready'), function() {
+	this.eachLayer(function(layer) {
+    	layer.on('click', clickHandler)
+    })
+})
