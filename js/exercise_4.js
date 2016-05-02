@@ -149,7 +149,7 @@ function getDirections(frm,to) {
           	api_key: 'valhalla-gwtf3x2'
         }
     }).done(function(data){
-    	var routeShape = polyline.decode(data.trip.legs[0].shape):
+    	var routeShape = polyline.decode(data.trip.legs[0].shape);
         routeLine.setGeoJSON({
           	type: 'Feature',
           	geometry: {
