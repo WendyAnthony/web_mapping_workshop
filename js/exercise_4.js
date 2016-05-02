@@ -27,6 +27,8 @@ var featureLayer = L.mapbox.featureLayer();
 	// Add it to the  map
 	featureLayer.addTo(map);
 // Stying - using ".on" is a listener called "ready" that is set once above stuff is loaded - 
+// Feature layer object type emits an event or status after it digests what we've called above 
+// associated with that layer (can be digesting multiple layers at once)
 featureLayer.on('ready', function(){
   this.eachLayer(function(layer){
   	// Mapbox/leaflet constructs
@@ -42,6 +44,5 @@ featureLayer.on('ready', function(){
 featureLayer.on('ready', function(){
 	this.eachLayer(function(layer){
     	layer.bindPopup('Welcome to ' + layer.feature.properties.name);
-    })
-                   
+    })                
  })
