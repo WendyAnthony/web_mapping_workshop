@@ -144,7 +144,7 @@ function getDirections(frm,to) {
     $.ajax({
     	url: 'https://valhalla.mapzen.com/route',
       	data: {
-          	json: jsonPayLoad,
+          	json: jsonPayload,
           	// Need to get your own key after this workshop. Go to the website and authenticate w/ github.
           	api_key: 'valhalla-gwtf3x2'
         }
