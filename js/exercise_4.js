@@ -64,6 +64,7 @@ var clickHandler = function(e){
   	var info = '';
     
     // take variable and apped something into it is the +=
+    // <p> is paragraph <a> is link.
     info += '<div>';
     info += '<h2>' + feature.properties.name + '</h2>';
     // If these properties exist, add them.
@@ -89,3 +90,30 @@ map.on('click', function(){
 	$('#sidebar').fadeOut(200);	
   
 })
+
+// What if we want to show the user where THEY are in relation to the restuarant.
+// Browsers have capability to get location of the device and share with js
+// First, create a new, blank feature layer that holds our location and add to map (chaining commands together)
+var myLocation = L.mapbox.featureLayer().addTo(map);
+
+// Listener for event 'locationfound'
+map.on('locationfound', function(e) {
+	myLocation.setGeoJSON({
+      	// set up geoJSON 
+    	type: 'Feature',
+      	geometry: {
+          type: 'Point',
+          // flat array (x,y)
+          coordinates: [ e.latlng.lng, e.latlng.lat ]
+    	}, 
+      	properties: {
+       		"title": "Here I am!", 
+          	"marker-color": "#ff8888",
+          	"marker-symbol": "star"
+        }
+      
+    })
+})
+
+// Now get our location
+map.locate({setView: true})
