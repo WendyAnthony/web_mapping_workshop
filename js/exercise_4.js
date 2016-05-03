@@ -144,7 +144,7 @@ function getDirections(frm,to) {
 
   // now need a way to call the service. Since we are using jquery (access it using $).
   $.ajax({
-    url:'http://valhalla.mapzen.com/route',
+    url:'https://valhalla.mapzen.com/route',
     data:{
       json: jsonPayload,
       api_key: 'valhalla-gwtf3x2'
