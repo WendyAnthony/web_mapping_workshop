@@ -180,7 +180,8 @@ function getDirections(frm,to) {
     })
 
   })
-
+    
+ })
 
 
 } // End getDirections
