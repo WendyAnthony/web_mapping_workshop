@@ -202,10 +202,15 @@ function getDirections(frm,to) {
           "marker-symbol": 'star'
         }
       })
+    }) // end mouseover instruction
+
+    // handles what to do when user mouses out of the sidebar - remove highlight from the map.
+    $('.instruction').on('mouseout', function(){
+      routeHighlight.clearLayers()
     })
 
 
-})
+}) // end .done
 
 
 } // End getDirections
