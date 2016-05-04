@@ -127,6 +127,8 @@ map.locate({setView: true})
 // Directions! Integrate w/ 3rd party turn-by-turn directions group. Using mapzen - which uses OSM. Check out their docs (in exercise 9).
 // Start w/ blank feature layer again.
 var routeLine = L.mapbox.featureLayer().addTo(map);
+// Holds moused-over section of the route to highlight it.
+var routeHighlight = L.mapbox.featureLayer().addTo(map); 
 
 // Need function to take from point and to point and call their service
 function getDirections(frm,to) {
@@ -180,8 +182,30 @@ function getDirections(frm,to) {
     })
 
   })
-    
- })
+
+      $('.instruction').on('mouseover', function(){
+      var begin = Number($(this).attr('data-begin'));
+      var end = Number($(this).attr('data-end'));
+
+      routeHighlight.setGeoJSON({
+        type:'Feature',
+        geometry:{
+          type: begin === end ? 'Point' : 'LineString',
+          coordinates: begin === end ? routeShape.slice(begin)[0] : routeShape.slice(begin,(end + 1))
+        },
+        properties:{
+          "stroke": '#1ea6f2',
+          "stroke-opacity": 0.9,
+          "stroke-width": 10,
+          "marker-color": '#1ea6f2',
+          "marker-size": 'small',
+          "marker-symbol": 'star'
+        }
+      })
+    })
+
+
+})
 
 
 } // End getDirections
